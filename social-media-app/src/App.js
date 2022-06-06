@@ -1,23 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import Signup from './component/Signup';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Ishan <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          I am clever
-        </a>
-      </header>
+      <Signup/>
     </div>
   );
 }

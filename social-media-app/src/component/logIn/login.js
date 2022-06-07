@@ -9,8 +9,8 @@ import GoogleIcon from '@mui/icons-material/Google';
 export default function Login() {
   return (
     <div className='login-background'>
-        <img src='Ellipse 68.png' alt='ellipse' className='ellipse1'/>
-        <img src='Ellipse 68.png' alt='ellipse' className='ellipse2'/>
+        <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse1'/>
+        <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse2'/>
         <div className='login-container'>
             <Typography  sx={{fontFamily:'Open Sans',fontSize:'35px',fontWeight:'600px',color:'#515151',marginTop:1}}>Log In</Typography><br/>
             <div className='login-input-feld'>

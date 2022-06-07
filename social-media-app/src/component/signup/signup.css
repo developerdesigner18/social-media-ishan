@@ -44,6 +44,8 @@
     background : '#F44235'!important;
     height:'100%';
     border-radius: '0px 5px 5px 0px';
+    padding-left: 20px !important;
+    border: 1 solid black !important;
     
 }
 .ellipse3{

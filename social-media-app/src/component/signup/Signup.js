@@ -11,11 +11,15 @@ import { GoogleLogin } from 'react-google-login'
 
 import { border } from '@mui/system';
 export default function Signup() {
+
+  const onGoogleLogin =(response)=>{
+    console.log(response)
+  }
  
   return (
     <div className='background'>
-      <img src='Ellipse 68.png' alt='ellipse' className='ellipse3'/>
-      <img src='Ellipse 68.png' alt='ellipse' className='ellipse4'/>
+      <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse3'/>
+      <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse4'/>
       <div className='signup-container'>
 
         <Typography  sx={{fontFamily:'Open Sans',fontSize:'35px',fontWeight:'600px',color:'#515151',marginTop:1}}>Sign Up</Typography><br/>
@@ -79,23 +83,28 @@ export default function Signup() {
             </div>  
           </div><br/>
             
-          <div className='link-btn'>
-            <div style={{background: '#C52D23',width:'94px',borderRadius: '5px 0px 0px 5px',}} >
-              <GoogleIcon sx={{color:'white',fontSize:'30px',marginTop:1}}/>
-            </div>
-            <div style={{margin:'auto',fontSize:'18px', background : '#F44235',height:'100%',width:'100%',borderRadius: '0px 5px 5px 0px'}}>
-              <Typography sx={{marginTop:1.5,color:'white'}}>LOG IN WITH GOOGLE</Typography>
-              
-            </div>  
-          </div>
-          {/* <GoogleLogin className='googlelogin'
-                clientId="618644845391-cami5t81cf7hma1mh31m1bvo7nqefiqj.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={()=>{console.log('log in success');}}
-              
-                cookiePolicy={'single_host_origin'}
-              />
-           */}
+          <GoogleLogin 
+            clientId="618644845391-cami5t81cf7hma1mh31m1bvo7nqefiqj.apps.googleusercontent.com"
+            buttonText={<Typography sx={{marginLeft : '70px'}}>LOG IN WITH GOOGLE</Typography>}
+            render={ renderProps =>(  
+              <Button onClick={renderProps.onClick} style={{width:'100%',padding:'0%'}} >           
+                <div className='link-btn'>
+                  <div style={{background: '#C52D23',width:'94px',borderRadius: '5px 0px 0px 5px',}} >
+                    <GoogleIcon sx={{color:'white',fontSize:'30px',marginTop:1}}/>
+                  </div>
+                <div style={{margin:'auto',fontSize:'18px', background : '#F44235',height:'100%',width:'100%',borderRadius: '0px 5px 5px 0px'}}>
+                  <Typography sx={{marginTop:1.5,color:'white'}}>LOG IN WITH GOOGLE</Typography>
+                </div>  
+                </div>
+              </Button>
+            )
+            }
+            onSuccess={onGoogleLogin}
+            onFailure={onGoogleLogin}
+            cookiePolicy={'single_host_origin'}
+          />
+          
+          
           
       
         </div>

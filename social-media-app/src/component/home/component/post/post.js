@@ -62,10 +62,10 @@ export default function Post() {
         <Newest/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        tranding
+        <Newest/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Discover
+        <Newest/>
       </TabPanel>
     </Box>
   );

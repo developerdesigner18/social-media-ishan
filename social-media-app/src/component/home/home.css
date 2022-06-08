@@ -1,12 +1,6 @@
-.home-navbar{
-    display: flex;
-    padding: 10px;
-}
-.heading{
-   text-align: left;
-   padding-top: 10px;
-   font-family: 'Open sans';
-
+.main-container{
+    width: 97%;
+    margin: auto;
 }
 .newPost-btn{
     text-align: right;
@@ -14,9 +8,6 @@
     height: 60px;
     background: rgba(46, 125, 50, 0.2);
     padding-right: 50px;
-    border-top: 2px solid rgba(46, 125, 50, 0.39);
-    /* border-bottom: 2px solid rgba(46, 125, 50, 0.39); */
-
 }
 .nav-Item{
     padding-left: 10%;
@@ -44,15 +35,14 @@
     width: 53%;
     margin-left: 3%;
     
-    height:700px;
-    overflow-y: scroll;
+    /* height:700px;
+    overflow-y: scroll; */
 }
-.post-container::-webkit-scrollbar {
+/* .post-container::-webkit-scrollbar {
     display: none;
-}
+} */
 .about-us-box{
     margin-left: 3%;
-    width: 20%;
-    border: 1px solid black;
-    height: 300px;
+    width: 25%;
+    
 }

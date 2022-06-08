@@ -10,6 +10,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import TagIcon from '@mui/icons-material/Tag';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Post from './component/post/post';
+import AboutUs from './component/aboutUs/AboutUs';
+import Navbar from '../navbar/Navbar';
 
 export default function Home() {
 
@@ -17,13 +19,8 @@ export default function Home() {
     
   return (
     <div>
-        <div className='home-navbar'>
-            <Avatar src='images/image 2.png' sx={{width:'70px',height:'70px',padding:1}}> </Avatar>
-            <div className='heading'>
-                <Typography sx={{fontSize:'25px',justifyContent:'left'}}>Growth</Typography>
-                <Typography sx={{fontSize:'15px'}}>swip tips fro finding user and customer</Typography>
-            </div>
-        </div>
+        <Navbar/>
+        <div className='main-container'>
         <div className='newPost-btn'>
             <Button variant="contained" color="success" sx={{marginRight:3,marginTop:1.5}}>New post</Button>
             <Button variant="contained" color="success"sx={{marginTop:1.5}}>Join Group <AirlineStopsIcon sx={{marginLeft:2}}/></Button>
@@ -74,9 +71,9 @@ export default function Home() {
                     </Tab.Pane>
                 </Tab.Content>
             </Tab.Container>
-            <div className='about-us-box'>About us</div>
+            <div className='about-us-box'><AboutUs/></div>
         </div>
-        
+        </div>
     </div>
   )
 }

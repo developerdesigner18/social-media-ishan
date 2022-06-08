@@ -1,0 +1,21 @@
+.home-navbar{
+    display: flex;
+    padding: 10px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 8px rgba(46, 125, 50, 0.35);
+    width: 97%;
+    margin: auto;
+}
+.heading{
+    text-align: left;
+    padding-top: 10px;
+    font-family: 'Open sans';
+ 
+ }
+ .navbar-login-signup-btn{
+    text-align: right;
+    width: 100%;
+    height: 60px;
+    /* background: rgba(46, 125, 50, 0.2); */
+    padding-right: 50px;
+ }

@@ -1,6 +1,6 @@
 .login-background{
     background: linear-gradient(0deg, #E67D53 -1.04%, #FDBD4F 102.34%);
-    height: 650px;
+    height: 100vh;
 }
 .login-container{
     position: absolute;

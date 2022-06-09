@@ -131,45 +131,44 @@ export default function NuserProfile() {
                     
                 </div>
                 <div className='follower-box'>
-                    <Button variant="contained" color="success"sx={{marginLeft:'15%',marginTop:2,height:'30px',width:'220px',}}>follow </Button>
-                    <div className="numberofFollowe">
-                        <div><span style={{fontWeight:500}}>341 </span><span style={{color:'#535252'}}> Follower</span></div>
-                        <div><span style={{fontWeight:500}}>5.3k </span><span style={{color:'#535252'}}> Point</span></div>
+                    <div className='follow-btn-container'>
+                        <Button variant="contained" color="success"sx={{marginTop:2,height:'30px',width:'80%',}}>follow </Button>
+                        <div className="numberofFollowe">
+                            <div><span style={{fontWeight:500}}>341 </span><span style={{color:'#535252'}}> Follower</span></div>
+                            <div><span style={{fontWeight:500}}>5.3k </span><span style={{color:'#535252'}}> Point</span></div>
+                        </div>
                     </div>
                     <br/><br/>
-                    <span style={{color:'#2E7D32',fontWeight:700,fontSize:'18px',marginRight:'10px'}}>Follower</span><span style={{fontWeight:500}}>520</span>
-                    <div style={{marginTop : '10px',display: 'flex',width:'95%',marginLeft:'10px'}}>
-
-                    <Grid container spacing={1}>
-                        {  
-                            followerLst.map((i,index)=>{
-                                return(
-                                    <>
-                                    { 
-                                    index<7
-                                    ? (
-                                        <Grid item  md={3}>
-                                        <Avatar src={`images/${i.profileImage}`} sx={{height:'50px',width:'50px',border : '2px solid #2E7D32'}}/>
-                                        </Grid>
-                                    )
-                                    :(
-                                        <Grid item  md={3}>
-                                        <Avatar sx={{height:'50px',width:'50px',border : '2px solid #2E7D32',background:'white',color:'black'}}>+{remainingFoloower}</Avatar>
-                                        </Grid>
-
-                                    )
-                                }
-                                    
-                                    </>
-                                )
-                            })
-                        }
-                       
-                       
-                    </Grid>
-                  
-                   
-                    
+                    <div className='follower-container'>
+                        <span style={{color:'#2E7D32',fontWeight:700,fontSize:'18px',marginRight:'10px'}}>Follower</span><span style={{fontWeight:500}}>520</span>
+                        <div style={{marginTop : '10px',display: 'flex',width:'95%',}}>
+                            <Grid container spacing={1}>
+                                {  
+                                    followerLst.map((i,index)=>{
+                                        return(
+                                            <>
+                                            { 
+                                            index<7
+                                            ? (
+                                                <Grid item  md={3}>
+                                                <Avatar src={`images/${i.profileImage}`} sx={{height:'50px',width:'50px',border : '2px solid #2E7D32'}}/>
+                                                </Grid>
+                                            )
+                                            :(
+                                                <Grid item  md={3}>
+                                                <Avatar sx={{height:'50px',width:'50px',border : '2px solid #2E7D32',background:'white',color:'black'}}>+{remainingFoloower}</Avatar>
+                                                </Grid>
+                                            )
+                                        }
+                                            </>
+                                        )
+                                    })
+                                } 
+                            </Grid>
+                        </div><br/>
+                        <h6 style={{fontSize:'18px'}}>Help.About. Investors. Privacy and Policy. Trems of Services. Status</h6>
+                        <p style={{margin:'0px'}}>@2022GabAI, INC</p>
+                        <p style={{margin:'0px'}}>Gabsocial is a open sourse software code.gab</p>
                     </div>
                 </div>
             </div>

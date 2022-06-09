@@ -58,3 +58,11 @@
     margin-top: 8px;
 
 }
+.follow-btn-container{
+    text-align: center;
+    box-shadow: 0px 0px 8px rgba(46, 125, 50, 0.15);
+    border-radius: 5px;
+}
+.follower-container{
+    margin-left: 20px;
+}

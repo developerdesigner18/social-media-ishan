@@ -52,7 +52,7 @@ export default function Newest() {
                 return(
                     <div>
                     <Card>
-                        <div className='card-header'>
+                        <div className='card-Header'>
                             <Avatar src={`images/${i.prfileImage}`} sx={{width:'90px',height:'90px',padding:0}}></Avatar>
                             <div className='card-title'>
                                 <Typography  sx={{fontSize:'19px' ,fontWeight:600}}>{i.title}</Typography>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './signup.css'
 import {Button, Divider, InputAdornment, TextField, Typography,Link} from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,13 +7,45 @@ import LockIcon from '@mui/icons-material/Lock';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
-import { border } from '@mui/system';
+
 export default function Signup() {
-
+  const navigate = useNavigate()
+  const [username, setusername] = useState('')
+  const [email, setemail] = useState('')
+  const [phone, setphone] = useState('')
+  const [password, setpassword] = useState('')
+  const [confirmPassword, setconfirmPassword] = useState('')
+  const [errpass, seterrpass] = useState(false)
+  
+  
   const onGoogleLogin =(response)=>{
     console.log(response)
+  }
+  const onSignup=(e)=>{
+
+    if(password==confirmPassword){
+
+      axios.post('http://localhost:5000/auth/signin',
+      {
+        username:username,
+        email:email,
+        phone:phone,
+        password:password,
+      }
+      )
+      .then((response)=>{navigate('/login')})
+      .catch((err)=>{
+        console.log(err)
+        alert('user name alredy exists')
+      })
+    }
+    else{
+      seterrpass(true)
+    }
   }
  
   return (
@@ -24,7 +56,9 @@ export default function Signup() {
 
         <Typography  sx={{fontFamily:'Open Sans',fontSize:'35px',fontWeight:'600px',color:'#515151',marginTop:1}}>Sign Up</Typography><br/>
         <div className='input-feld'>
-          <TextField  placeholder='Enter name' size='small' fullWidth margin="dense" InputProps={{
+          <TextField  label='name' size='small' fullWidth margin="dense" 
+          onChange={(e)=>setusername(e.target.value)}
+          InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <PersonIcon fontSize='medium'/>
@@ -32,7 +66,8 @@ export default function Signup() {
             ),
             }}
           />
-          <TextField  placeholder='Enter email' size='small' fullWidth margin="dense" InputProps={{
+          <TextField  label='email' size='small' fullWidth margin="dense" onChange={(e)=>setemail(e.target.value)} 
+          InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <EmailIcon fontSize='medium'/>
@@ -40,7 +75,8 @@ export default function Signup() {
             ),
             }}
           />
-          <TextField  placeholder='Phone number' size='small' fullWidth margin="dense" InputProps={{
+          <TextField  label='Phone number' size='small' fullWidth margin="dense" onChange={(e)=>setphone(e.target.value)}
+           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <PhoneIcon fontSize='medium'/>
@@ -48,7 +84,8 @@ export default function Signup() {
             ),
             }}
           />
-          <TextField  placeholder='Password' size='small' fullWidth margin="dense" InputProps={{
+          <TextField  label='Password' size='small' fullWidth margin="dense" onChange={(e)=>setpassword(e.target.value)}
+          InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <LockIcon fontSize='medium'/>
@@ -56,7 +93,8 @@ export default function Signup() {
             ),
             }}
           />
-          <TextField  placeholder='Confirm Password' size='small' fullWidth margin="dense" InputProps={{
+          <TextField  label='Confirm Password' size='small' fullWidth margin="dense" error={errpass} onChange={(e)=>setconfirmPassword(e.target.value)}
+          InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <LockIcon fontSize='medium'/>
@@ -66,7 +104,7 @@ export default function Signup() {
           />
           <br/>
           <div className='sign-btn'>
-          <Button  sx={{color: 'white',fontSize: '18px'}}  fullWidth>Sign Up</Button>
+          <Button  sx={{color: 'white',fontSize: '18px'}}  fullWidth onClick={onSignup}>Sign Up</Button>
           </div>
           <Typography sx={{fontSize:'17px',color:'#7D7979'}}> Have already Account 
             <Link href='/login'underline="hover" sx={{color:'#E67D53'}}>  Signin</Link> 
@@ -103,10 +141,6 @@ export default function Signup() {
             onFailure={onGoogleLogin}
             cookiePolicy={'single_host_origin'}
           />
-          
-          
-          
-      
         </div>
       </div>
     </div>

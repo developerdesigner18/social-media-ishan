@@ -1,12 +1,19 @@
 import { Avatar, Button, Divider, Typography } from '@mui/material'
 import React from 'react'
 import './navbar.css'
-
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
+  const navigate = useNavigate()
   return (
     <div>
         <div className='navbar-login-signup-btn'>
-            <Button variant="contained" color="success" sx={{marginRight:3,marginTop:1.5,height:'30px'}}>Login</Button>
+            <Button variant="contained" color="success" 
+            sx={{marginRight:3,marginTop:1.5,height:'30px'}} 
+            onClick={()=>{ 
+              localStorage.clear()
+              navigate('/login')
+            }}
+            >Login</Button>
             <Button variant="contained" color="success"sx={{marginTop:1.5,height:'30px'}}>Signup </Button>
         </div>
         <Divider ></Divider><br/>

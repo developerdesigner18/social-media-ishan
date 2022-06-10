@@ -6,8 +6,9 @@ import LockIcon from '@mui/icons-material/Lock';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
 import axios from 'axios'
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
     const navigate = useNavigate()
@@ -29,6 +30,7 @@ export default function Login() {
         .catch((err)=>{console.log('err',err.message);})
     }
   return (
+      
     <div className='login-background'>
         <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse1'/>
         <img src='images/Ellipse 68.png' alt='ellipse' className='ellipse2'/>
@@ -55,7 +57,7 @@ export default function Login() {
                     ),
                     }}
                 />
-                <Typography sx={{textAlign :'right',color:' #7D7979'}}>forget password</Typography>
+                <Link to ='/forgot'><Typography sx={{textAlign :'right',color:' #7D7979'}}>forget password</Typography></Link>
                 
                 <br/>
                 <div className='login-btn'>

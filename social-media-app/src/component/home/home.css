@@ -33,7 +33,7 @@
     display: flex;
 }
 .post-container{
-    width: 53%;
+    width: 100%;
     margin-left: 3%;
     
     /* height:700px;
@@ -43,7 +43,7 @@
     display: none;
 } */
 .about-us-box{
-    margin-left: 3%;
-    width: 25%;
+    margin-left: 7%;
+    width: 83%;
     
 }

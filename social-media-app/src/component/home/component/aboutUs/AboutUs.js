@@ -40,7 +40,7 @@ export default function AboutUs() {
             <div ><LocalOfferIcon sx={{fontSize:'18px',color:'#2E7D32'}}/><span> Tag</span></div>
         </div>
         <hr/>
-        <div style={{ display:'flex'}}>
+        <div style={{ display:'flex',width:'100%',wordBreak: 'break-word'}}>
             <h6>Modretedby </h6>
             <p> csllen,roisesherry,Channingallen</p>
         </div>

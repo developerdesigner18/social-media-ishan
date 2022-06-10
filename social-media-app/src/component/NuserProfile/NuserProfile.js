@@ -1,11 +1,11 @@
 import { Avatar, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card,} from 'react-bootstrap'
 import Navbar from '../navbar/Navbar'
 import './nuserProfile.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
-import { margin } from '@mui/system'
+
 
 const data = [
     {

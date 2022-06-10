@@ -13,7 +13,7 @@ export default function Navbar() {
               localStorage.clear()
               navigate('/login')
             }}
-            >Login</Button>
+            >Log out</Button>
             <Button variant="contained" color="success"sx={{marginTop:1.5,height:'30px'}}>Signup </Button>
         </div>
         <Divider ></Divider><br/>

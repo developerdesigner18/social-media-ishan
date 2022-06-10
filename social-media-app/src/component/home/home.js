@@ -1,4 +1,4 @@
-import { Avatar, Button, Typography } from '@mui/material'
+import { Button } from '@mui/material'
 import React from 'react'
 import './home.css'
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
@@ -12,6 +12,7 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Post from './component/post/post';
 import AboutUs from './component/aboutUs/AboutUs';
 import Navbar from '../navbar/Navbar';
+import Searsh from '../search/search';
 
 export default function Home() {
 
@@ -55,7 +56,7 @@ export default function Home() {
                         <Post/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"search"}>
-                    <h1>Search</h1>
+                        <Searsh/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"chat"}>
                     <h1>Chat</h1>
@@ -71,7 +72,7 @@ export default function Home() {
                     </Tab.Pane>
                 </Tab.Content>
             </Tab.Container>
-            <div className='about-us-box'><AboutUs/></div>
+            {/* <div className='about-us-box'><AboutUs/></div> */}
         </div>
         </div>
     </div>

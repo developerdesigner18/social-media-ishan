@@ -1,5 +1,5 @@
-import { Avatar, Button, Card, CardContent, IconButton, Typography } from '@mui/material'
-import { fontWeight } from '@mui/system'
+import { Avatar, Button, Card, IconButton, Typography } from '@mui/material'
+import{Link} from 'react-router-dom'
 import React from 'react'
 import './newest.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -53,7 +53,7 @@ export default function Newest() {
                     <div>
                     <Card>
                         <div className='card-Header'>
-                            <Avatar src={`images/${i.prfileImage}`} sx={{width:'90px',height:'90px',padding:0}}></Avatar>
+                            <Link to ='/nuser'><Avatar src={`images/${i.prfileImage}`} sx={{width:'90px',height:'90px',padding:0}}></Avatar></Link>
                             <div className='card-title'>
                                 <Typography  sx={{fontSize:'19px' ,fontWeight:600}}>{i.title}</Typography>
                                 <span>{i.username}</span>
@@ -62,7 +62,7 @@ export default function Newest() {
                                 <span><CalendarMonthIcon sx={{fontSize:'17px'}}/> {i.postDate}</span>
                                 <span><IconButton sx={{fontSize:'13px',color:'black'}} ><ModeCommentOutlinedIcon sx={{color:'green',fontSize:'17px'}}/>Comment</IconButton></span>
                                 <div className='card-content'>
-                                    <img src={`images/${i.image}`} height='416px' width='330px'></img>
+                                    <img src={`images/${i.image}`} height='416px' width='330px' alt='post'></img>
                                     <div className='like-comment-btn'>
                                         <IconButton >
                                             <FavoriteIcon sx={{fontSize:'30px'}}/>

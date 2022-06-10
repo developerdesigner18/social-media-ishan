@@ -5,6 +5,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Newest from './newest';
+import AboutUs from '../aboutUs/AboutUs';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,7 +49,7 @@ export default function Post() {
   };
 
   return (
-      
+    <div style={{display:'flex'}}>
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider',width:'100%'  }}>
        
@@ -68,5 +70,10 @@ export default function Post() {
         <Newest/>
       </TabPanel>
     </Box>
+      <Box>
+        <div className='about-us-box'><AboutUs/></div>
+      </Box>
+    </div>
+
   );
 }

@@ -9,6 +9,7 @@ import NuserProfile from './component/NuserProfile/NuserProfile';
 import Welcome from './component/welcome/Welcome';
 import Proute from './component/Proute';
 import LogoutProute from './component/LogoutProute';
+import Forgotpassword from './component/forgotPassword/Forgotpassword';
 function App() {
   return (
     <BrowserRouter>
@@ -16,7 +17,8 @@ function App() {
     <Routes>
       <Route path='/' element ={<LogoutProute><Welcome/></LogoutProute>}/>
       <Route path='/signup' element={<LogoutProute><Signup/></LogoutProute>}/>
-      <Route path='/login' element={<Login/>}/>
+      <Route path='/login' element={<LogoutProute><Login/></LogoutProute>}/>
+      <Route path='/forgot' element={<LogoutProute><Forgotpassword/></LogoutProute>}/>
       <Route path='/home' element={<Proute><Home/></Proute>}/>
       <Route path='/nuser' element={<Proute><NuserProfile/></Proute>}/>
     </Routes>

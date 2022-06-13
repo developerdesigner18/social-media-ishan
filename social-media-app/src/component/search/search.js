@@ -1,50 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import{Autocomplete, Avatar, Card, Grid, TextField, Typography} from '@mui/material'
-import axios from 'axios'
-import './search.css';
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import './search.css'
+import SearchPeople from './people/searchPeople';
+import { TextField } from '@mui/material';
 
-export default function Searsh() {
-  const [data, setdata] = useState([])
-  useEffect(()=>{
-     axios.get('http://localhost:5000/getalluser')
-     .then((response)=>{
-        setdata(response.data.data)
-        console.log(data);
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
-     })
-     .catch((err)=>{console.log('err',err);})
-  },[])
   return (
-    <div>
-        <h1>Search</h1>
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={data.map((item)=>item.username)}
-          fullWidth
-          renderInput={(params) => <TextField {...params} label="users" />}
-        /><br/>
-        <Grid container spacing={2}>
-          <Grid item md={4}>
-            <Card>
-              <div className='display-user-card'>
-                <Avatar src='images/profileImage5.jpg'  alt='profile' sx={{height:'55px',width:'55px',border : '3px solid #2E7D32'}}/>
-                <Typography sx={{fontSize:'18px',fontWeight:600}}> @ishan123</Typography>
-              </div>
-            
-            </Card>
-          </Grid>
-          <Grid item md={4}>
-            <Card>
-            <Avatar src='images/profile1.png' alt='profile'/>
-            </Card>
-          </Grid>
-          <Grid item md={4}>
-            <Card>
-            <Avatar src='images/profile1.png' alt='profile'/>
-            </Card>
-          </Grid>
-        </Grid>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
-  )
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <>
+      <div className='search-main-container'>
+        <Box sx={{ width: '100%', textAlign: 'left',paddingRight:'20px' }}>
+          <TextField label='search' size='small' fullWidth></TextField>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="People" {...a11yProps(0)} />
+              <Tab label="Groups" {...a11yProps(1)} />
+              <Tab label="Marketplace" {...a11yProps(2)} />
+            </Tabs>
+          </Box>
+          <TabPanel value={value} index={0}>
+            <SearchPeople/>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            Groups
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            Marketplace
+          </TabPanel>
+        </Box>
+        <Box style={{border:'1px solid black',width:'40%'}}>hello</Box>
+      </div>
+    </>
+  );
 }

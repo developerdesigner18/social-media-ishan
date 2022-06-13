@@ -1,5 +1,5 @@
-import { Button } from '@mui/material'
-import React from 'react'
+import { Button, Dialog, DialogContent } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import './home.css'
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import {Nav,Tab} from 'react-bootstrap'
@@ -10,20 +10,46 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import TagIcon from '@mui/icons-material/Tag';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Post from './component/post/post';
-import AboutUs from './component/aboutUs/AboutUs';
 import Navbar from '../navbar/Navbar';
 import Searsh from '../search/search';
+import Newpost from './component/newPost/Newpost';
+import axios from 'axios'
 
 export default function Home() {
+    const [open, setOpen] = React.useState(false);
+    const [post, setpost] = useState([])
+    
 
-
+    useEffect(()=>{
+        axios.get('http://localhost:5000/getalluser/post', {headers:{
+            "Authorization":  localStorage.getItem('token')
+        }})
+        .then((response)=>{
+            console.log(response.data.data);
+            setpost(response.data.data)
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    },[])
+    const handleClose = (value) => {
+        setOpen(false);
+      };
+    const onAddnewPost =()=>{
+        setOpen(true);
+    }
     
   return (
     <div>
         <Navbar/>
+        <Dialog open={open} onClose={handleClose} >
+            <DialogContent className='add-post-container'> 
+                <Newpost handleClose={handleClose}/>
+            </DialogContent>
+        </Dialog>
         <div className='main-container'>
         <div className='newPost-btn'>
-            <Button variant="contained" color="success" sx={{marginRight:3,marginTop:1.5}}>New post</Button>
+            <Button variant="contained" color="success" sx={{marginRight:3,marginTop:1.5}} onClick={onAddnewPost}>New post</Button>
             <Button variant="contained" color="success"sx={{marginTop:1.5}}>Join Group <AirlineStopsIcon sx={{marginLeft:2}}/></Button>
         </div><br/>
         <div className='menu-container'>

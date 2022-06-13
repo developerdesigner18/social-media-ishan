@@ -8,6 +8,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import axios from 'axios'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import jwtDecode from 'jwt-decode'
 
 
 export default function Login() {
@@ -24,6 +25,9 @@ export default function Login() {
         ).then((response)=>{
             console.log('login successful',response)
             localStorage.setItem('token',response.data.token)
+            const user = jwtDecode(response.data.token)
+            localStorage.setItem('username',user.username)
+            localStorage.setItem('userId',user.id)
             
             navigate('/')
         })

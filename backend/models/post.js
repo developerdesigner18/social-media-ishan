@@ -16,7 +16,12 @@ const Post = new mongooes.Schema(
     postLike:{
         type:[String],
         
-    }
+    },
+    cmtArray : [{
+        username:String,
+        comment : String,
+        commentTime: String,
+    }]
   }
 );
 module.exports = mongooes.model("Post", Post);

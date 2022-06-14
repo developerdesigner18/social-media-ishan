@@ -48,4 +48,22 @@ route.get('/post',verify,(req,res)=>{
    
 })
 
+route.post('/userprofile',verify,(req,res)=>{
+    jwt.verify(req.token , 'secretkey',(err,data)=>{
+        if(err){
+            console.log('403 jwt if err');
+            res.sendStatus(403)
+        }
+        else{
+            User.find({username:req.body.username})
+            .then((data)=>{
+                return res.status(200).json({data:data})
+            })
+            .catch((err)=>{
+                return res.status(500).json({message:err.message})
+            })
+        }
+    })
+})
+
 module.exports= route

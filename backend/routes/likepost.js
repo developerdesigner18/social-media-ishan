@@ -18,14 +18,14 @@ route.post('/',verify,async(req,res)=>{
             Post.findOne({_id:req.body.id})
             .then((data)=>{
                 if(!data.postLike.includes(req.body.username)){
-                    console.log(req.body.username);
+                    
                     Post.updateOne({_id :req.body.id},{"$push":{postLike: req.body.username} })
-                    .then(()=>console.log(data.postLike ))
+                    .then(()=>console.log('like post'))
                     .catch((err)=>console.log('post not like',err))
                 }
                 else{
                     Post.updateOne({_id :req.body.id},{"$pullAll":{postLike: [req.body.username]} })
-                    .then(()=>console.log('in else',data.postLike ))
+                    .then(()=>console.log('in else' ))
                     .catch((err)=>console.log('post not like',err))
                 }
             })

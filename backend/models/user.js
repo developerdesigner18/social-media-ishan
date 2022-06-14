@@ -15,6 +15,13 @@ const User = new mongooes.Schema(
     phone:{
         type:String
     },
+    following:{
+        type:Array,
+        default:[]
+    },
+    profileImage : {
+        type: String,
+    }
   }
 );
 module.exports = mongooes.model("User", User);

@@ -5,7 +5,11 @@ const User = new mongooes.Schema(
         type:String, 
         unique: true,
         index: true,
-        required: true },
+        required: true 
+    },
+    profileImage:{
+        type:String
+    },
     email: {
         type:String
     },
@@ -19,9 +23,7 @@ const User = new mongooes.Schema(
         type:Array,
         default:[]
     },
-    profileImage : {
-        type: String,
-    }
+    
   }
 );
 module.exports = mongooes.model("User", User);

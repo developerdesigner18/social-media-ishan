@@ -63,13 +63,14 @@ export default function Newest() {
 
   return (
     <div className='post-card' >
-        {
-            post.map((i)=>{
+        {post && userdata
+            ?
+            (post?.map((i)=>{
                 return(
                     <div>
                     <Card>
                         <div className='card-Header'>
-                            <Link to ='/nuser'><Avatar src={`images/profile1.png`} sx={{width:'90px',height:'90px',padding:0}}></Avatar></Link>
+                            <Link to ='/nuser'><Avatar src={`http://localhost:5000/static/${i.profileImage}`} sx={{width:'75px',height:'75px',padding:0,border:'3px solid #2E7D32'}}></Avatar></Link>
                             <div className='card-title'>
                                 <Typography  sx={{fontSize:'19px' ,fontWeight:600}}>{i.caption}</Typography>
                                 <span>{i.username}</span>
@@ -130,7 +131,8 @@ export default function Newest() {
                     </div>
                 )
 
-            })
+            }))
+            :(<h3>loadin</h3>)
         }
     </div>
   )

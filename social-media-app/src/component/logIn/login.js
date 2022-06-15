@@ -27,7 +27,7 @@ export default function Login() {
             localStorage.setItem('token',response.data.token)
             const user = jwtDecode(response.data.token)
             localStorage.setItem('username',user.username)
-            localStorage.setItem('userId',user.id)
+            localStorage.setItem('profileImage',user.profileImage)
             
             navigate('/')
         })

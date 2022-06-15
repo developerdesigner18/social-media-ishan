@@ -14,6 +14,7 @@ import Navbar from '../navbar/Navbar';
 import Searsh from '../search/search';
 import Newpost from './component/newPost/Newpost';
 import axios from 'axios'
+import ChatApp from '../chat/ChatApp';
 
 export default function Home() {
     const [open, setOpen] = React.useState(false);
@@ -85,7 +86,7 @@ export default function Home() {
                         <Searsh/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"chat"}>
-                    <h1>Chat</h1>
+                    <ChatApp/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"notification"}>
                     <h1>notification</h1>

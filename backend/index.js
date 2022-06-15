@@ -8,6 +8,7 @@ const AddPost = require('./routes/addnewPost')
 const likepost = require('./routes/likepost')
 const Follow = require('./routes/follow')
 const Comment = require('./routes/commentRoute')
+const Chat = require('./routes/chat')
 const  cors = require("cors");
 app.use(cors());
 const path = require('path')
@@ -22,6 +23,7 @@ app.use('/addpost',AddPost)
 app.use('/likepost',likepost)
 app.use('/follow',Follow)
 app.use('/comment',Comment)
+app.use('/chat',Chat)
 
 
 app.listen(5000,()=>{

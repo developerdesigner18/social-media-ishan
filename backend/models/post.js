@@ -4,6 +4,9 @@ const Post = new mongooes.Schema(
     username:{
         type:String
     },
+    profileImage:{
+        type:String
+    },
     caption:{
         type:String
     },

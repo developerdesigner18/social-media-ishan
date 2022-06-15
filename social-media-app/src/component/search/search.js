@@ -52,7 +52,7 @@ export default function BasicTabs() {
     <>
       <div className='search-main-container'>
         <Box sx={{ width: '100%', textAlign: 'left',paddingRight:'20px' }}>
-          <TextField label='search' size='small' fullWidth></TextField>
+          
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="People" {...a11yProps(0)} />

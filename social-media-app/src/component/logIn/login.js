@@ -26,6 +26,7 @@ export default function Login() {
             console.log('login successful',response)
             localStorage.setItem('token',response.data.token)
             const user = jwtDecode(response.data.token)
+            localStorage.setItem('id',user.id)
             localStorage.setItem('username',user.username)
             localStorage.setItem('profileImage',user.profileImage)
             

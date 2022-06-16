@@ -1,4 +1,4 @@
-function verifyToken(req,res,next){
+ function  verifyToken(req,res,next){
     // console.log(req.headers);
 //    const beareHeader = req.body.header
 //    console.log(beareHeader);

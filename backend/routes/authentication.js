@@ -44,7 +44,7 @@ route.post('/login',async(req,res)=>{
           );
           if (validPasswrod) {
             var token = jwt.sign(
-              { profileImage: user.profileImage, username: user.username },
+              { profileImage: user.profileImage, username: user.username ,id:user._id},
               'secretkey',
               {
                 expiresIn: "28d", // 24 hours

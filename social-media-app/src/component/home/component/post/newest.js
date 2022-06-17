@@ -20,7 +20,6 @@ export default function Newest() {
     
     const [commentflafID, setcommentflafID] = useState('')
 
-
     useEffect(()=>{
         axios.post('http://localhost:5000/getalluser/userprofile',{username:localStorage.getItem('username')},{headers:{
             "Authorization":  localStorage.getItem('token')
@@ -113,7 +112,7 @@ export default function Newest() {
                             </div>
                             <div>
                                 {
-                                    userdata.username != i.username && 
+                                    userdata?.username != i.username && 
                                     (
                                         <>
                                         {

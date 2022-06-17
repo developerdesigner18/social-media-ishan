@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 const verify = require('./functions/varifytoke')
 
 route.post('/creatchat',async(req,res)=>{
-    console.log('chatuserid',req.body.chatuserid);
+    // console.log('chatuserid',req.body.chatuserid);
     var isChat = await Chat.find({
     isGroupChat: false,
     $and: [

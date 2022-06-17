@@ -43,11 +43,16 @@ export default function Displayuser({handlechatUser}) {
 
   return (
     <div className='chat-user-container'><br/>
-      <TextField label='search' size='small' fullWidth onChange={(e)=>searchUser(e.target.value)}></TextField><br/>
+      <TextField label='search' size='small' fullWidth 
+      sx={{borderRadius:'20px'}}
+      onChange={(e)=>searchUser(e.target.value)}
+      ></TextField><br/>
       {
         userdata.map((i,index)=>{
           return(
-            <Box className={`user-box-${
+            <>
+            {i.username != localStorage.getItem('username') && (
+              <Box className={`user-box-${
                 index === selectChat ? "selected" : ""
               }`}
               onClick={()=>{handleselectuser(index,i)}}
@@ -58,9 +63,12 @@ export default function Displayuser({handlechatUser}) {
                  
               </div>
             </Box>
+            )}
+            </>
           )
         })
       }
+      
      
     </div>
   )

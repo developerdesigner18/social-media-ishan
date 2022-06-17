@@ -26,6 +26,39 @@ app.use('/comment',Comment)
 app.use('/chat',Chat)
 
 
-app.listen(5000,()=>{
+const server = app.listen(5000,()=>{
     console.log('server is runing');
+})
+
+const io = require('socket.io')(server,{
+    pingTimeout:60000,
+    cors:{
+        origin:'http://localhost:3000',
+    }
+})
+io.on('connection',(socket)=>{
+    console.log('connected to soket.io');
+    
+    socket.on("setup",(userdata)=>{
+        socket.join(userdata._id)
+        console.log(userdata._id);
+        socket.emit("connected")
+    })
+
+    socket.on("join chat",(room)=>{
+        socket.join(room)
+        console.log("joined room :" + room);
+    })
+    socket.on("typing", (room) => socket.in(room).emit("typing"));
+    socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
+
+    socket.on("new message",(newMesageRecieved)=>{
+        console.log(newMesageRecieved);
+        var chat = newMesageRecieved.chat
+        if(!chat.users) return console.log("chat.users not define");
+        chat.users.forEach(user => {
+            if(user._id == newMesageRecieved.sender._id) return;
+            socket.in(user._id).emit("message recieved", newMesageRecieved)
+        }); 
+    })
 })

@@ -19,7 +19,7 @@ import ChatApp from '../chat/ChatApp';
 export default function Home() {
     const [open, setOpen] = React.useState(false);
     const [post, setpost] = useState([])
-    
+    const [loading, setloading] = useState(true)
 
     useEffect(()=>{
         axios.get('http://localhost:5000/getalluser/post', {headers:{
@@ -28,6 +28,7 @@ export default function Home() {
         .then((response)=>{
             console.log(response.data.data);
             setpost(response.data.data)
+            setloading(false)
         })
         .catch((err)=>{
             console.log(err);
@@ -78,26 +79,28 @@ export default function Home() {
                     </Nav.Item>
                     </div>
                 </Nav>
-                <Tab.Content className='post-container'>
-                    <Tab.Pane eventKey={"home"}>
-                        <Post/>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey={"search"}>
-                        <Searsh/>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey={"chat"}>
-                    <ChatApp/>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey={"notification"}>
-                    <h1>notification</h1>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey={"tranding"}>
-                    <h1>tranding</h1>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey={"communities"}>
-                    <h1>communities</h1>
-                    </Tab.Pane>
-                </Tab.Content>
+                {!loading && (<>
+                    <Tab.Content className='post-container'>
+                        <Tab.Pane eventKey={"home"}>
+                            <Post/>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={"search"}>
+                            <Searsh/>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={"chat"}>
+                        <ChatApp/>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={"notification"}>
+                        <h1>notification</h1>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={"tranding"}>
+                        <h1>tranding</h1>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={"communities"}>
+                        <h1>communities</h1>
+                        </Tab.Pane>
+                    </Tab.Content>
+                </>)}
             </Tab.Container>
             {/* <div className='about-us-box'><AboutUs/></div> */}
         </div>

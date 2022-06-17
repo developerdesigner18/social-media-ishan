@@ -4,13 +4,20 @@
     height: 500px
 }
 .display-user{
-    border: 1px solid rgb(66, 66, 66);
+    background-color: rgba(248, 244, 240, 0.664);
+    /* background-image: url('C:/Users/01/Desktop/social-media/social-media-app/public/images/Ellipse 68.png'); */
+    border: 3px solid rgb(126, 126, 126);
     border-radius: 10px;
     width: 30%;
     margin: 5px;
     padding: 10px;
 }
+.typing-msg-box{
+    height: 30px;
+}
 .chat-box{
+    background-image: url('C:/Users/01/Desktop/social-media/social-media-app/public/images/chat_background.jpg');
+
     border: 1px solid rgb(66, 66, 66);
     border-radius: 10px;
     width: 70%;
@@ -19,6 +26,7 @@
 }
 .chat-input-container{
     display: flex;
+    margin-top: 15px;
 }
 .chat-emoji{
     color:#ffea00;

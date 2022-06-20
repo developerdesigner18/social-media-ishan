@@ -63,3 +63,13 @@
 .input-box input[type=text]:focus {
     outline: none;
   }
+.message-navbar{
+    /* height: 50px; */
+    background-color: rgba(248, 244, 240, 0.664);
+    border-bottom: 2px solid rgb(126, 126, 126);
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-left: -10px;
+    text-align: right;
+    width: 748px;
+}

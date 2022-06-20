@@ -9,6 +9,7 @@ const likepost = require('./routes/likepost')
 const Follow = require('./routes/follow')
 const Comment = require('./routes/commentRoute')
 const Chat = require('./routes/chat')
+const Updateprofile = require('./routes/updateProfile')
 const  cors = require("cors");
 app.use(cors());
 const path = require('path')
@@ -24,6 +25,7 @@ app.use('/likepost',likepost)
 app.use('/follow',Follow)
 app.use('/comment',Comment)
 app.use('/chat',Chat)
+app.use('/updateprofile',Updateprofile)
 
 
 const server = app.listen(5000,()=>{
@@ -53,7 +55,7 @@ io.on('connection',(socket)=>{
     socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
     socket.on("new message",(newMesageRecieved)=>{
-        console.log(newMesageRecieved);
+        // console.log(newMesageRecieved);
         var chat = newMesageRecieved.chat
         if(!chat.users) return console.log("chat.users not define");
         chat.users.forEach(user => {
@@ -61,4 +63,40 @@ io.on('connection',(socket)=>{
             socket.in(user._id).emit("message recieved", newMesageRecieved)
         }); 
     })
+
+    // socket.emit("me", socket.id)
+
+    // socket.on("disconnect", () => {
+	// 	socket.broadcast.emit("callEnded")
+	// })
+
+    // socket.on("callUser", (data) => {
+	// 	io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+	// })
+
+	// socket.on("answerCall", (data) => {
+	// 	io.to(data.to).emit("callAccepted", data.signal)
+	// })
+
+    socket.off("setup", () => {
+        console.log("USER DISCONNECTED");
+        socket.leave(userdata._id);
+      });
 })
+
+// io.on('connection',(socket)=>{
+
+//     socket.emit("me", socket.id)
+
+//     socket.on("disconnect", () => {
+// 		socket.broadcast.emit("callEnded")
+// 	})
+
+//     socket.on("callUser", (data) => {
+// 		io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
+// 	})
+
+// 	socket.on("answerCall", (data) => {
+// 		io.to(data.to).emit("callAccepted", data.signal)
+// 	})
+// })

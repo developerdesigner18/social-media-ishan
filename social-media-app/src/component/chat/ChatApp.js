@@ -11,6 +11,8 @@ import io from 'socket.io-client'
 import Lottie from 'react-lottie'
 import animationData from './animation/typing.json'
 
+
+
 const ENDPOINT = "http://localhost:5000"
 var socket, selectedChatCompare;
 const user ={
@@ -19,6 +21,7 @@ const user ={
     profileImage:localStorage.getItem('profileImage')
 }
 export default function ChatApp() {
+   
     const [chatuser, setchatuser] = useState('')
     const [emojiFlag, setemojiFlag] = useState(false)
     const [msg, setmsg] = useState('')
@@ -139,8 +142,8 @@ export default function ChatApp() {
     useEffect(()=>{
 
         socket.on("message recieved",(newMeesageRecieved)=>{
-            console.log("1",selectedChatCompare._id);
-            console.log('2',newMeesageRecieved.chat._id);
+            // console.log("1",selectedChatCompare._id);
+            // console.log('2',newMeesageRecieved.chat._id);
             if((!selectedChatCompare) || (selectedChatCompare != newMeesageRecieved.chat._id)){
                 //give notification 
                 console.log("in if");
@@ -161,6 +164,7 @@ export default function ChatApp() {
             {!chatuser 
             ?(<h1>Welcome</h1>)
             :(<>
+               
                 <Message messages={allmsg}/>
                 <div className='typing-msg-box'>
                     {istyping ? (
@@ -173,7 +177,7 @@ export default function ChatApp() {
                         />
                         </div>
                     ) : (
-                        <></>
+                        <><div></div></>
                     )}
                 </div>
                 <div className='chat-input-container'>

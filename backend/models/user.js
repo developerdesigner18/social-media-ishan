@@ -23,6 +23,9 @@ const User = new mongooes.Schema(
         type:Array,
         default:[]
     },
+    bio:{
+        type:String,
+    }
     
   }
 );

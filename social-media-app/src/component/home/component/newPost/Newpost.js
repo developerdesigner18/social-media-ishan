@@ -16,6 +16,7 @@ export default function Newpost({handleClose}) {
     var today  = new Date()
     var formdata = new FormData()
     formdata.append('username',localStorage.getItem('username'))
+    formdata.append('profileImage',localStorage.getItem('profileImage'))
     formdata.append('postTime',today.getFullYear() + '-' + today.toLocaleString('en-us', { month: 'long' }) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes())
     formdata.append('caption',caption)
     formdata.append('postimage',postimage)

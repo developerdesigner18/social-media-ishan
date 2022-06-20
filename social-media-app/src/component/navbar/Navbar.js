@@ -14,11 +14,13 @@ export default function Navbar() {
               navigate('/login')
             }}
             >Log out</Button>
-            <Button variant="contained" color="success"sx={{marginTop:1.5,height:'30px'}}>Signup </Button>
+            <Button variant="contained" color="success"sx={{marginTop:1.5,height:'30px'}} onClick={()=> navigate('/profile')}>Profile </Button>
         </div>
         <Divider ></Divider><br/>
         <div className='home-navbar'>
-            <Avatar src='images/image 2.png' sx={{width:'70px',height:'70px',padding:1}}> </Avatar>
+            <Button onClick={()=>navigate('/')}>
+              <Avatar src='images/image 2.png' sx={{width:'70px',height:'70px',padding:1}}> </Avatar>
+            </Button>
             <div className='heading'>
                 <Typography sx={{fontSize:'25px',justifyContent:'left'}}>Growth</Typography>
                 <Typography sx={{fontSize:'15px'}}>swip tips fro finding user and customer</Typography>

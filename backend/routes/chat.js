@@ -99,12 +99,20 @@ route.post('/fetchmessage',async(req,res)=>{
       {
         const messages = await Message.find({ chat: req.body.chatId })
           .populate("sender", "username profileImage email")
+          // .populate({
+          //   path:"chat",
+          //   populate:{
+          //     path:"users",
+          //     model:"User"
+          //   }.
+          // })
           .populate("chat")
+          
           .catch((err)=>console.log(err))
         res.json(messages);
       }
       } catch (error) {
-        res.status(400);
+        res.status(400); 
         throw new Error(error.message);
       }
 })

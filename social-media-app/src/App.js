@@ -10,6 +10,8 @@ import Welcome from './component/welcome/Welcome';
 import Proute from './component/Proute';
 import LogoutProute from './component/LogoutProute';
 import Forgotpassword from './component/forgotPassword/Forgotpassword';
+import Videocall from './component/videocall/Videocall';
+import Profile from './component/profile/Profile';
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +23,8 @@ function App() {
       <Route path='/forgot' element={<LogoutProute><Forgotpassword/></LogoutProute>}/>
       <Route path='/home' element={<Proute><Home/></Proute>}/>
       <Route path='/nuser' element={<Proute><NuserProfile/></Proute>}/>
+      <Route path='/profile' element={<Proute><Profile/></Proute>}/>
+      <Route path='/videocall' element={<Proute><Videocall/></Proute>}/>
     </Routes>
     </div>
     </BrowserRouter>

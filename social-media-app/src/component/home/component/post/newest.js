@@ -21,7 +21,7 @@ export default function Newest() {
     const [commentflafID, setcommentflafID] = useState('')
 
     useEffect(()=>{
-        axios.post('http://localhost:5000/getalluser/userprofile',{username:localStorage.getItem('username')},{headers:{
+        axios.post('http://localhost:5000/getalluser/userprofile',{id:localStorage.getItem('id')},{headers:{
             "Authorization":  localStorage.getItem('token')
         }})
         .then((response)=>{setuserdata(response.data.data[0]);})
@@ -93,7 +93,7 @@ export default function Newest() {
                                     </div>
                                     <div className='like-comment-btn'>
                                         <IconButton onClick={()=>likepost(i._id)}>
-                                            {!i.postLike.includes(localStorage.getItem('username')) 
+                                            {!i.postLike?.includes(localStorage.getItem('username')) 
                                             ? (<FavoriteIcon  sx={{fontSize:'30px'}}/>)
                                             :(<FavoriteIcon  sx={{fontSize:'30px',color:'red'}}/>)} 
                                         </IconButton><br/>
@@ -116,7 +116,7 @@ export default function Newest() {
                                     (
                                         <>
                                         {
-                                            !userdata?.following.includes(i.username) 
+                                            !userdata?.following?.includes(i.username) 
                                             ?(<Button sx={{border:'1px solid green',height:'30px',color:'black'}} onClick={()=>followUser(i.username)}>Follow</Button>)
                                             :(<Button sx={{border:'1px solid green',height:'30px',color:'black'}} onClick={()=>followUser(i.username)}>UnFollow</Button>)
                                         }

@@ -35,6 +35,7 @@ route.post('/',uploadFiles.single("postimage"),verify,async(req,res)=>{
             
             var Post1 =  new Post({
                 username : req.body.username,
+                profileImage:req.body.profileImage,
                 caption : req.body.caption,
                 postimage: req.file.filename ,
                 postTime: req.body.postTime,

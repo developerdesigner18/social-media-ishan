@@ -26,4 +26,7 @@
 }
 .dispaly-username-chatbox{
     margin-top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

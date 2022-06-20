@@ -1,10 +1,13 @@
-import { Avatar, TextField } from '@mui/material'
+import { Avatar, IconButton, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './displayUser.css'
+import VideocamIcon from '@mui/icons-material/Videocam';
+import {useNavigate} from 'react-router-dom'
 
 export default function Displayuser({handlechatUser}) {
+  const navigate = useNavigate()
   const [userdata, setuserdata] = useState([])
   const [alldata, setalldata] = useState([])
   const [selectChat, setselectChat] = useState('')
@@ -59,8 +62,14 @@ export default function Displayuser({handlechatUser}) {
               >
               <div><Avatar src={`http://localhost:5000/static/${i.profileImage}`}  alt='profile' sx={{height:'40px',width:'40px',border : ' 3px solid #2E7D32',margin:'5px'}}></Avatar></div>
               <div className='dispaly-username-chatbox'>
-                  <span style={{fontSize:'18px',fontWeight:500}}> @{i.username}</span>
-                 
+                  <div>
+                    <p style={{fontSize:'18px',fontWeight:500,marginTop:'5px',marginBottom:'0px'}}> @{i.username}</p>
+                  </div>
+                  <div>
+                      <IconButton onClick={()=>navigate('/videocall')}>
+                          <VideocamIcon/>
+                      </IconButton>
+                  </div>
               </div>
             </Box>
             )}

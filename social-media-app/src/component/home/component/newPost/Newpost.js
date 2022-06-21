@@ -10,7 +10,11 @@ export default function Newpost({handleClose}) {
   const [imageflag, setimageflag] = useState(false)
   const [caption, setcaption] = useState('')
 
-
+  //--------RELOAD PAGE-----------
+  const refresh = () => {
+    window.location.reload(false);
+  };
+  //----------UPLOAD POST-------------
   const onSubmitpost =(e)=>{
     e.preventDefault()
     var today  = new Date()
@@ -28,6 +32,8 @@ export default function Newpost({handleClose}) {
   })
   .then((response)=>{
     console.log('post uploaded',response);
+    handleClose()
+    refresh()
   })
   .catch((err)=>{
     console.log('err',err);

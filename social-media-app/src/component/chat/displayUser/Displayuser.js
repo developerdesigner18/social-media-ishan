@@ -53,12 +53,13 @@ export default function Displayuser({handlechatUser}) {
       {
         userdata.map((i,index)=>{
           return(
-            <>
+            <div key={index}>
             {i.username != localStorage.getItem('username') && (
               <Box className={`user-box-${
                 index === selectChat ? "selected" : ""
               }`}
               onClick={()=>{handleselectuser(index,i)}}
+              
               >
               <div><Avatar src={`http://localhost:5000/static/${i.profileImage}`}  alt='profile' sx={{height:'40px',width:'40px',border : ' 3px solid #2E7D32',margin:'5px'}}></Avatar></div>
               <div className='dispaly-username-chatbox'>
@@ -73,7 +74,7 @@ export default function Displayuser({handlechatUser}) {
               </div>
             </Box>
             )}
-            </>
+            </div>
           )
         })
       }

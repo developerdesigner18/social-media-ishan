@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './login.css'
-import {Button, Divider, InputAdornment, TextField, Typography} from '@mui/material'
+import {Button, Divider, InputAdornment, TextField, Typography,} from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
@@ -15,7 +15,8 @@ export default function Login() {
     const navigate = useNavigate()
     const [username, setusername] = useState('')
     const [password, setpassword] = useState('')
-
+    
+    //---------LOGIN--------------
     const onLogin =()=>{
         axios.post('http://localhost:5000/auth/login',
         {
@@ -68,6 +69,9 @@ export default function Login() {
                 <div className='login-btn'>
                 <Button  sx={{color: 'white',fontSize: '18px'}}  fullWidth onClick={onLogin}>Sign In</Button>
                 </div>
+                <Typography sx={{fontSize:'17px',color:'#7D7979'}}>Don't Have Account 
+                    <Link to='/signup'underline="hover" style={{color:'#E67D53'}}>  Signup</Link> 
+                </Typography>
                 <Divider sx={{color:'#7D7979',fontSize:'18px',marginTop: '10px'}}>Or</Divider><br/>
             
 

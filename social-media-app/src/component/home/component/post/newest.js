@@ -1,5 +1,5 @@
 import { Avatar, Button, Card, IconButton, Typography } from '@mui/material'
-import{Link} from 'react-router-dom'
+import{Link, Navigate, useNavigate} from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import './newest.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -9,19 +9,23 @@ import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 import axios from 'axios'
 import Comment from '../comment/Comment';
+// import { useDispatch } from 'react-redux';
+// import { fatchUser } from '../../../../featurs/UserSlice'; 
 
 
 
 export default function Newest() {
+    // const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [post, setpost] = useState([])
     const [likebtnColor, setlikebtnColor] = useState(false)
     const [followFlag, setfollowFlag] = useState(true)
     const [userdata, setuserdata] = useState([])
-    
     const [commentflafID, setcommentflafID] = useState('')
 
     useEffect(()=>{
-        axios.post('http://localhost:5000/getalluser/userprofile',{id:localStorage.getItem('id')},{headers:{
+        axios.post('http://localhost:5000/getalluser/userprofile',{username:localStorage.getItem('username')},{headers:{
             "Authorization":  localStorage.getItem('token')
         }})
         .then((response)=>{setuserdata(response.data.data[0]);})
@@ -38,6 +42,7 @@ export default function Newest() {
         })
     },[likebtnColor,followFlag])
 
+    //---------------LIKE POST-------------
     const likepost =(id)=>{
         setlikebtnColor(!likebtnColor)
         axios.post('http://localhost:5000/likepost',{id:id,username:localStorage.getItem('username')},
@@ -45,7 +50,7 @@ export default function Newest() {
             "Authorization":  localStorage.getItem('token')
         }})
     }
-
+    //---------------FOLLOW USER--------------
     const followUser =(followuser)=>{
         setfollowFlag(!followFlag)
         axios.post('http://localhost:5000/follow',{username:localStorage.getItem('username'),followuser:followuser},
@@ -55,7 +60,7 @@ export default function Newest() {
         .then((response)=>{console.log(response)})
         .catch((err)=>console.log('err',err))
     }
-    
+    //------------HANDLE COMMENT---------------
     const CommentonPost =(id)=>{
         setcommentflafID(id)
     }
@@ -64,14 +69,21 @@ export default function Newest() {
     <div className='post-card' >
         {post && userdata
             ?
-            (post?.map((i)=>{
+            (post?.map((i,index)=>{
                 return(
-                    <div>
+                    <div key={index}>
                     <Card>
                         <div className='card-Header'>
-                            <Link to ='/nuser'><Avatar src={`http://localhost:5000/static/${i.profileImage}`} sx={{width:'75px',height:'75px',padding:0,border:'3px solid #2E7D32'}}></Avatar></Link>
+                            <Button onClick={()=>{
+                                localStorage.setItem('searchuser',i.username)
+                                navigate('/profile')
+                                }} 
+                                sx={{height: 'fit-content'}}    
+                            >
+                                <Avatar src={`http://localhost:5000/static/${i.profileImage}`} sx={{width:'75px',height:'75px',padding:0,border:'3px solid #2E7D32'}}/>
+                            </Button>
                             <div className='card-title'>
-                                <Typography  sx={{fontSize:'19px' ,fontWeight:600}}>{i.caption}</Typography>
+                                <Typography   sx={{fontSize:'19px' ,fontWeight:600}}>{i.caption}</Typography>
                                 <span>{i.username}</span>
                                 <span>Growth & user Aquisition</span><br/>
                                 <IconButton sx={{marginLeft:'-10px'}}>
@@ -85,11 +97,16 @@ export default function Newest() {
                                 </span>
                                 <div className='card-content'>
                                     <div>
-                                    <img src={`http://localhost:5000/static/${i.postimage}`} height='416px' width='330px' alt='post' style={{borderRadius:'10px'}}></img>
-                                    { 
-                                        commentflafID==i._id &&
-                                        (<Comment postId ={i._id}  />)
-                                    }
+                                        {i.postimage.includes('.mp4')
+                                        ?( <video width="330" height="416" controls >
+                                                <source src={`http://localhost:5000/static/${i.postimage}`} type="video/mp4"/>
+                                            </video>)
+                                        :(<img src={`http://localhost:5000/static/${i.postimage}`} height='416px' width='330px' alt='post' style={{borderRadius:'10px'}}></img>)
+                                        }
+                                        { 
+                                            commentflafID==i._id &&
+                                            (<Comment postId ={i._id}  />)
+                                        }
                                     </div>
                                     <div className='like-comment-btn'>
                                         <IconButton onClick={()=>likepost(i._id)}>

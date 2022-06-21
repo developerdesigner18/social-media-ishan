@@ -16,7 +16,9 @@ import Newpost from './component/newPost/Newpost';
 import axios from 'axios'
 import ChatApp from '../chat/ChatApp';
 
+
 export default function Home() {
+ 
     const [open, setOpen] = React.useState(false);
     const [post, setpost] = useState([])
     const [loading, setloading] = useState(true)

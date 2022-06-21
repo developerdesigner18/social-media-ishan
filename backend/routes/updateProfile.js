@@ -5,6 +5,7 @@ route.use(bodyParser.json());
 route.use(bodyParser.urlencoded({ extended: true }));
 const verify = require('./functions/varifytoke')
 const User = require("../models/user");
+const Post = require('../models/post')
 const jwt = require('jsonwebtoken')
 
 const multer = require('multer');
@@ -56,5 +57,24 @@ route.post('/',uploadFiles.single("profileImage"),verify,async(req,res)=>{
     })
 })
 
+route.post('/deletepost',verify,(req,res)=>{
+    jwt.verify(req.token , 'secretkey',(err,data)=>{
+        if(err){
+            console.log('403 jwt if err');
+            res.sendStatus(403)
+        }
+        else{
+            Post.deleteOne({_id:req.body.id})
+            .then(()=>{
+                console.log('delete post')
+                res.status(200).json({message: 'delete post'})
+            })
+            .catch((err)=>{
+                console.log(err)
+                res.status(403).json({message: 'somthing went wrong'})
+            })
+        }
+    })
+})
 
 module.exports= route

@@ -37,14 +37,14 @@ export default function SearchPeople() {
     <div>
       <TextField label='search' size='small' fullWidth onChange={(e)=>searchUser(e.target.value)}></TextField><br/>
       {
-        userdata.map((i)=>{
+        userdata.map((i,index)=>{
           return(
-            <Box sx={{ borderBottom: 1, borderColor: '#cecece',display:'flex', margin:1}}>
+            <Box sx={{ borderBottom: 1, borderColor: '#cecece',display:'flex', margin:1}} key={index}>
               <div><Avatar src={`http://localhost:5000/static/${i.profileImage}`}  alt='profile' sx={{height:'60px',width:'60px',border : ' 3px solid #2E7D32',margin:'5px'}}></Avatar></div>
               <div>
                   <span style={{fontSize:'21px',fontWeight:500}}>{i.username}</span>
                   {/* <span style={{fontSize:'19px'}}>View you post</span> */}
-                  <p style={{fontSize:'13px',margin:0}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet purus congue massa nulla augue molestie magna nunc. Sagittis volutpat pretium feugiat vel egestas odio</p><br/>
+                  <p style={{fontSize:'13px',margin:0}}>{i.bio}</p><br/>
                   {/* <p style={{fontSize:'13px',fontWeight:500}}>10 min ago</p> */}
               </div>
             </Box>

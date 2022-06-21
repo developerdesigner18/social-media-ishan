@@ -40,6 +40,8 @@ export default function Comment({postId}) {
         .then((response)=>{
             setcommentflaf(true)
             console.log(response)
+            setcomment('')
+
         })
         .catch((err)=>{
             
@@ -64,9 +66,9 @@ export default function Comment({postId}) {
        
         {
             morecommentflag 
-            ? (allcomment.map((i)=>{
+            ? (allcomment.map((i,index)=>{
                 return(
-                    <Box className='comment-container'>
+                    <Box className='comment-container'key={index}>
                         <div>
                                 <Avatar src='images/profile1.png'></Avatar>
                         </div>
@@ -76,7 +78,7 @@ export default function Comment({postId}) {
                                     <Typography sx={{fontSize:'14px',width:'190px'}}>{i.comment}</Typography>
                                 </div> 
                                 <div>
-                                        <Typography sx={{fontSize:'13px',texAlign:'right'}}>{moment(i.commentTime).startOf('ss').fromNow()}</Typography>
+                                    <Typography sx={{fontSize:'13px',texAlign:'right'}}>{moment(i.commentTime).startOf('ss').fromNow()}</Typography>
                                 </div>
                         </div>
                     </Box>

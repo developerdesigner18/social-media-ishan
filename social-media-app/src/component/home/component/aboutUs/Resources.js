@@ -24,9 +24,9 @@ export default function Resources() {
     <div className='resources-container'>
         <h5>Resources</h5>
         {
-            resources.map((i)=>{
+            resources.map((i,index)=>{
                 return(
-                    <>
+                    <div  key={index}>
                     <div className='resources-box'>
                         <div>
                             <img src={`images/${i.image}`} className='resources-img'/>
@@ -42,7 +42,7 @@ export default function Resources() {
                             }
                         </p>
                     </div><br/>
-                    </>
+                    </div>
                 )
             })
         }

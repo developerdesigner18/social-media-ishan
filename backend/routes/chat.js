@@ -104,7 +104,7 @@ route.post('/fetchmessage',async(req,res)=>{
           //   populate:{
           //     path:"users",
           //     model:"User"
-          //   }.
+          //   }
           // })
           .populate("chat")
           

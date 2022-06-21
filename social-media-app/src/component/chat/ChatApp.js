@@ -177,7 +177,7 @@ export default function ChatApp() {
                         />
                         </div>
                     ) : (
-                        <><div></div></>
+                        <><div>.</div></>
                     )}
                 </div>
                 <div className='chat-input-container'>

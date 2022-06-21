@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './signup.css'
-import {Button, Divider, InputAdornment, TextField, Typography,Link} from '@mui/material'
+import {Button, Divider, InputAdornment, TextField, Typography} from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
@@ -10,6 +10,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { GoogleLogin } from 'react-google-login';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 
 export default function Signup() {
@@ -25,6 +26,8 @@ export default function Signup() {
   const onGoogleLogin =(response)=>{
     console.log(response)
   }
+  
+  //--------------SIGNUP------------
   const onSignup=(e)=>{
 
     if(password==confirmPassword){
@@ -107,7 +110,7 @@ export default function Signup() {
           <Button  sx={{color: 'white',fontSize: '18px'}}  fullWidth onClick={onSignup}>Sign Up</Button>
           </div>
           <Typography sx={{fontSize:'17px',color:'#7D7979'}}> Have already Account 
-            <Link href='/login'underline="hover" sx={{color:'#E67D53'}}>  Signin</Link> 
+            <Link to='/login'underline="hover" style={{color:'#E67D53'}}>  Signin</Link> 
           </Typography>
           <Divider sx={{color:'#7D7979',fontSize:'18px',marginTop: '10px'}}>Or</Divider><br/>
       

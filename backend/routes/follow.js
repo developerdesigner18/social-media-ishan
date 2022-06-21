@@ -17,7 +17,7 @@ route.post('/',verify,(req,res)=>{
             res.sendStatus(403)
         }
         else{
-            console.log('hello in else');
+            
             User.find({username:req.body.username})
             .then((user)=>{
                 

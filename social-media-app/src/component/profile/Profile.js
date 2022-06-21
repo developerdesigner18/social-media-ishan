@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Avatar, Button, Grid, IconButton, TextareaAutosize, TextField, Typography } from '@mui/material'
+import { Avatar, Button, Grid, IconButton, speedDialActionClasses, TextareaAutosize, TextField, Typography } from '@mui/material'
 import Navbar from '../navbar/Navbar'
 import EditIcon from '@mui/icons-material/Edit';
 import './profile.css'
 import DisplayPost from './DisplayPost';
+// import {useSelector} from 'react-redux'
 
 function Profile() {
-    
+    const username = localStorage.getItem('searchuser')
     const [userData, setuserData] = useState([])
-    const [username, setusername] = useState('')
+    // const [username, setusername] = useState('')
     const [email, setemail] = useState('')
     const [bio, setbio] = useState('')
     const [profileImage, setprofileImage] = useState({})
@@ -17,25 +18,25 @@ function Profile() {
     const [imageflag, setimageflag] = useState(false)
 
     useEffect(()=>{
-        axios.post('http://localhost:5000/getalluser/userprofile',{id:localStorage.getItem('id')},{headers:{
+        axios.post('http://localhost:5000/getalluser/userprofile',{username:username},{headers:{
             "Authorization":  localStorage.getItem('token')
         }})
         .then((response)=>{
             console.log(response);
             setuserData(response.data.data[0])
-            setusername(response.data.data[0].username)
+            // setusername(response.data.data[0].username)
             setemail(response.data.data[0].email)
             setbio(response.data.data[0].bio)
         })
 
     },[])
 
-    console.log(userData?.following?.length);
+    //------------update funcion-----------
     const onUpdate =(e)=>{
         e.preventDefault()
         var formdata = new FormData()
         formdata.append('id',localStorage.getItem('id'))
-        formdata.append('username',username)
+        formdata.append('username',localStorage.getItem('username'))
         formdata.append('email',email)
         formdata.append('bio',bio)
         formdata.append('profileImage',profileImage)
@@ -63,13 +64,16 @@ function Profile() {
                     <div className='usename-bio'>
                         <span className='NuseName'>@{userData?.username}</span>
                         <span style={{fontSize: '22px',fontWeight: 600,color : '#8C8C8C'}}>Dark</span>
-                        <span ><IconButton style={{fontSize:'16px',marginLeft :'10px',marginTop:'-10px'}} onClick={()=>seteditFlag(true)}><EditIcon/>Edit profile</IconButton> </span>
-                        <Typography>Los Angeles, Califirnia. joined 4 years ago. Finding insights on acquistion channels that ( consistently ) work for fonuders, Visit ZeroTousers.com for the preliminary findings.</Typography>
+                        {localStorage.getItem('username')===localStorage.getItem('searchuser')
+                        ?(<span ><IconButton style={{fontSize:'16px',marginLeft :'10px',marginTop:'-10px'}} onClick={()=>seteditFlag(true)}><EditIcon/>Edit profile</IconButton> </span>)
+                        :null
+                        }
+                        <Typography>{userData?.bio}</Typography>
                         {editFlag && (
                             <form method='post' onSubmit={onUpdate}>
-                                <TextField label='username' size='small' value={username} sx={{width:'500px'}} margin="dense"
+                                {/* <TextField label='username' size='small' value={username} sx={{width:'500px'}} margin="dense"
                                     onChange={(e)=>setusername(e.target.value)}
-                                /><br/>
+                                /><br/> */}
                                 <TextareaAutosize 
                                     value={bio}
                                     label='bio'
@@ -96,7 +100,7 @@ function Profile() {
             </div>
             <br/>
             <div className='user-profile-container'>
-                <div style={{width : '50%',marginLeft:'8%',marginRight:'8%'}}>
+                <div style={{width : '50%',marginLeft:'5%',marginRight:'8%'}}>
                     <DisplayPost/>
                     
                 </div>

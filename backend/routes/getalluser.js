@@ -55,7 +55,7 @@ route.post('/userprofile',verify,(req,res)=>{
             res.sendStatus(403)
         }
         else{
-            User.find({_id:req.body.id})
+            User.find({username:req.body.username})
             .then((data)=>{
                 return res.status(200).json({data:data})
             })
@@ -67,7 +67,7 @@ route.post('/userprofile',verify,(req,res)=>{
 })
 
 route.post('/userpost',verify,(req,res)=>{
-    console.log('hello');
+    
     jwt.verify(req.token , 'secretkey',(err,data)=>{
         if(err){
             console.log('403 jwt if err');

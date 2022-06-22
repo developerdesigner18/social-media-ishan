@@ -70,7 +70,15 @@ export default function BasicTabs() {
             Marketplace
           </TabPanel>
         </Box>
-        <Box style={{border:'1px solid black',width:'40%'}}>hello</Box>
+        <Box style={{border:'1px solid #CBC9C9',background: 'rgba(255, 255, 255, 0.58)',borderRadius:'5px',height: '388px',width:'40%',textAlign:'left',padding:'20px'}}>
+          <h4 style={{color:'#2E7D32'}}>Popular search</h4>
+          <hr/>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+          <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. </p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+          <p>Lorem ipsum dolor sit amet, consecte adipiscing elit. </p>
+          <h5 style={{color:'#2E7D32'}}>more</h5>
+        </Box>
       </div>
     </>
   );

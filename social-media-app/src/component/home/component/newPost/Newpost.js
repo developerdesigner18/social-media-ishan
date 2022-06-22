@@ -10,11 +10,11 @@ export default function Newpost({handleClose}) {
   const [imageflag, setimageflag] = useState(false)
   const [caption, setcaption] = useState('')
 
-  //--------RELOAD PAGE-----------
+  //--------RELOAD PAGE----------------------------
   const refresh = () => {
     window.location.reload(false);
   };
-  //----------UPLOAD POST-------------
+  //----------UPLOAD POST--------------------------
   const onSubmitpost =(e)=>{
     e.preventDefault()
     var today  = new Date()

@@ -1,5 +1,5 @@
-const mongooes = require("mongoose");
-const User = new mongooes.Schema(
+const mongoose = require("mongoose");
+const User = new mongoose.Schema(
   {
     username: {
         type:String, 
@@ -25,8 +25,9 @@ const User = new mongooes.Schema(
     },
     bio:{
         type:String,
-    }
+    },
+    story:[{type: mongoose.Schema.Types.ObjectId, ref: "Story"}]
     
   }
 );
-module.exports = mongooes.model("User", User);
+module.exports = mongoose.model("User", User);

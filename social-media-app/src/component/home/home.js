@@ -62,7 +62,7 @@ export default function Home() {
                     <div className='menu-bar'>
                         <h3>Menu</h3>
                     <Nav.Item >
-                        <Nav.Link eventKey={"home"} style={{color:'#464242'}}><HomeIcon/> Home</Nav.Link>
+                        <Nav.Link eventKey={"home"} style={{color:'#464242',cursor:"pointer"}}><HomeIcon/> Home</Nav.Link>
                     </Nav.Item>
                     <Nav.Item >
                         <Nav.Link eventKey={"search"} style={{color:'#464242'}}><SearchIcon/> Search</Nav.Link>

@@ -10,6 +10,7 @@ const Follow = require('./routes/follow')
 const Comment = require('./routes/commentRoute')
 const Chat = require('./routes/chat')
 const Updateprofile = require('./routes/updateProfile')
+const AddStory = require('./routes/addStory')
 const  cors = require("cors");
 app.use(cors());
 const path = require('path')
@@ -26,6 +27,7 @@ app.use('/follow',Follow)
 app.use('/comment',Comment)
 app.use('/chat',Chat)
 app.use('/updateprofile',Updateprofile)
+app.use('/story',AddStory)
 
 
 const server = app.listen(5000,()=>{
@@ -39,6 +41,7 @@ const io = require('socket.io')(server,{
     }
 })
 io.on('connection',(socket)=>{
+    
     // console.log('connected to soket.io');
     
     socket.on("setup",(userdata)=>{

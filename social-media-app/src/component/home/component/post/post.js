@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Newest from './newest';
 import AboutUs from '../aboutUs/AboutUs';
+import Story from '../../../story/Story';
 
 
 function TabPanel(props) {
@@ -61,6 +62,7 @@ export default function Post() {
         
       </Box>
       <TabPanel value={value} index={0}>
+        <Story/>
         <Newest/>
       </TabPanel>
       <TabPanel value={value} index={1}>

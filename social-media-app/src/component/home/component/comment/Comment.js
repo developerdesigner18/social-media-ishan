@@ -6,7 +6,7 @@ import axios from 'axios'
 import moment from 'moment'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-export default function Comment({postId}) {
+export default function Comment({postId,receiver}) {
     const [comment, setcomment] = useState('')
     const [allcomment, setallcomment] = useState([])
     const [commentflaf, setcommentflaf] = useState(false)
@@ -41,6 +41,19 @@ export default function Comment({postId}) {
             setcommentflaf(true)
             console.log(response)
             setcomment('')
+            axios.post('http://localhost:5000/notification/addtonotification',{
+                sender:localStorage.getItem('id'),
+                receiver:receiver,
+                postid:postId,
+                like:false,
+                comment:true,
+                commentText:comment,
+            },
+            {headers:{
+                "Authorization":  localStorage.getItem('token')
+            }})
+            .then(()=>{console.log('notification send')})
+            .catch((err)=>{console.log(err)})
 
         })
         .catch((err)=>{

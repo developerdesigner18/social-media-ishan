@@ -15,6 +15,7 @@ import Searsh from '../search/search';
 import Newpost from './component/newPost/Newpost';
 import axios from 'axios'
 import ChatApp from '../chat/ChatApp';
+import Notification from '../notification/Notification';
 
 
 export default function Home() {
@@ -93,7 +94,7 @@ export default function Home() {
                         <ChatApp/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={"notification"}>
-                        <h1>notification</h1>
+                        <Notification/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={"tranding"}>
                         <h1>tranding</h1>

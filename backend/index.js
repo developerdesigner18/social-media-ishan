@@ -11,6 +11,7 @@ const Comment = require('./routes/commentRoute')
 const Chat = require('./routes/chat')
 const Updateprofile = require('./routes/updateProfile')
 const AddStory = require('./routes/addStory')
+const Notification=require('./routes/notification')
 const  cors = require("cors");
 app.use(cors());
 const path = require('path')
@@ -28,6 +29,7 @@ app.use('/comment',Comment)
 app.use('/chat',Chat)
 app.use('/updateprofile',Updateprofile)
 app.use('/story',AddStory)
+app.use('/notification',Notification)
 
 
 const server = app.listen(5000,()=>{
@@ -65,6 +67,12 @@ io.on('connection',(socket)=>{
             if(user._id == newMesageRecieved.sender._id) return;
             socket.in(user._id).emit("message recieved", newMesageRecieved)
         }); 
+    })
+
+    
+    socket.on('new notification',(data)=>{
+        console.log('socket call');
+        socket.emit("send notification",data)
     })
 
     // socket.emit("me", socket.id)

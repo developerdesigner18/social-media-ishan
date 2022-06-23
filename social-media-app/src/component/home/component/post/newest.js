@@ -9,9 +9,12 @@ import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 import RedoRoundedIcon from '@mui/icons-material/RedoRounded';
 import axios from 'axios'
 import Comment from '../comment/Comment';
+import io from 'socket.io-client'
 // import { useDispatch } from 'react-redux';
 // import { fatchUser } from '../../../../featurs/UserSlice'; 
 
+const ENDPOINT = "http://localhost:5000"
+var socket;
 
 
 export default function Newest() {
@@ -23,6 +26,10 @@ export default function Newest() {
     const [followFlag, setfollowFlag] = useState(true)
     const [userdata, setuserdata] = useState([])
     const [commentflafID, setcommentflafID] = useState('')
+
+    useEffect(()=>{
+        socket = io(ENDPOINT)
+    },[])
 
     useEffect(()=>{
         axios.post('http://localhost:5000/getalluser/userprofile',{username:localStorage.getItem('username')},{headers:{
@@ -43,12 +50,28 @@ export default function Newest() {
     },[likebtnColor,followFlag])
 
     //---------------LIKE POST-------------
-    const likepost =(id)=>{
+    const likepost =(postid,receiver)=>{
         setlikebtnColor(!likebtnColor)
-        axios.post('http://localhost:5000/likepost',{id:id,username:localStorage.getItem('username')},
+        axios.post('http://localhost:5000/likepost',{id:postid,username:localStorage.getItem('username')},
         {headers:{
             "Authorization":  localStorage.getItem('token')
         }})
+        axios.post('http://localhost:5000/notification/addtonotification',{
+            sender:localStorage.getItem('id'),
+            receiver:receiver,
+            postid:postid,
+            like:true,
+            Comment:false,
+            commentText:'',
+        },
+        {headers:{
+            "Authorization":  localStorage.getItem('token')
+        }})
+        .then((response)=>{
+            console.log('notification send',response)
+            socket.emit("new notification",response.data)
+        })
+        .catch((err)=>{console.log(err)})
     }
     //---------------FOLLOW USER--------------
     const followUser =(followuser)=>{
@@ -98,18 +121,18 @@ export default function Newest() {
                                 <div className='card-content'>
                                     <div>
                                         {i.postimage.includes('.mp4')
-                                        ?( <video width="330" height="416" controls >
+                                        ?( <video width="330" height="416" controls autoPlay>
                                                 <source src={`http://localhost:5000/static/${i.postimage}`} type="video/mp4"/>
                                             </video>)
                                         :(<img src={`http://localhost:5000/static/${i.postimage}`} height='416px' width='330px' alt='post' style={{borderRadius:'10px'}}></img>)
                                         }
                                         { 
                                             commentflafID==i._id &&
-                                            (<Comment postId ={i._id}  />)
+                                            (<Comment postId ={i._id} receiver={i.username} />)
                                         }
                                     </div>
                                     <div className='like-comment-btn'>
-                                        <IconButton onClick={()=>likepost(i._id)}>
+                                        <IconButton onClick={()=>likepost(i._id,i.username)}>
                                             {!i.postLike?.includes(localStorage.getItem('username')) 
                                             ? (<FavoriteIcon  sx={{fontSize:'30px'}}/>)
                                             :(<FavoriteIcon  sx={{fontSize:'30px',color:'red'}}/>)} 
@@ -148,7 +171,7 @@ export default function Newest() {
                 )
 
             }))
-            :(<h3>loadin</h3>)
+            :(<h3>loading</h3>)
         }
     </div>
   )

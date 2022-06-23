@@ -36,7 +36,8 @@ route.post('/',uploadFiles.single("storyimage"),verify,(req,res)=>{
         else{
             var newStory = new Story({
                 userid : req.body.userid,
-                storylist :req.file.filename
+                storylist :req.file.filename,
+                
             })
             newStory.save()
             .then(()=>{
@@ -53,7 +54,7 @@ route.post('/',uploadFiles.single("storyimage"),verify,(req,res)=>{
 
 route.post('/getstory',(req,res)=>{
     User.find({_id:req.body.id})
-    .populate("story",'storylist')
+    .populate("story")
     .then((response)=>{
         res.send(response)
     })
@@ -63,7 +64,9 @@ route.post('/getstory',(req,res)=>{
 })
 
 route.get('/fatchallstory',(req,res)=>[
-    Story.find().populate("userid").then((response)=>{res.send(response)})
+    Story.find().populate("userid")
+    .then((response)=>{res.send(response)})
+    .catch((err)=>res.status(403).json({message:'something wend wrong'}))
 ])
 
 module.exports= route

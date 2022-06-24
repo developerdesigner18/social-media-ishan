@@ -4,43 +4,66 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment'
 import io from 'socket.io-client'
+import {useDispatch} from 'react-redux';
+import { getnotification } from '../../featurs/UserSlice' 
 
 const ENDPOINT = "http://localhost:5000"
 var socket
 
 export default function Notification() {
+    const dispatch= useDispatch()
+
     const navigate= useNavigate()
     const [notification, setnotification] = useState([])
-    const [first, setfirst] = useState(false)
+    const [flag, setflag] = useState(false)
 
-     useEffect(()=>{
-        socket = io(ENDPOINT)
-    },[])
-    useEffect(()=>{
+
+    //  useEffect(()=>{
+    //     socket = io(ENDPOINT)
+    // },[])
+    // useEffect(()=>{
+    //     console.log('hello');
+    //     socket.on("send notification",(data)=>{
+    //         console.log('socket work');
+    //         alert('new notification')
+    //         setnotification([...notification,data])
+    //     })
         
-        socket.on("send notification",(data)=>{
-            console.log('socket work');
-            alert('new notification')
-            setnotification([...notification,data])
-        })
         
-    })
+    // })
+    // socket.on("send notification",(data)=>{
+    //     console.log('socket work');
+    //     alert('new notification')
+    //     setnotification([...notification,data])
+    // })
 
     useEffect(()=>{
         axios.post('http://localhost:5000/notification/fatchnotification',{username:localStorage.getItem('username')},
         {headers:{
             "Authorization":  localStorage.getItem('token')
         }}).then((response)=>{
-            console.log(response.data)
+            
             setnotification(response.data)
+
+            dispatch(getnotification({numberofnotification:response.data.length}))
         })
         .catch((err)=>{console.log(err);})
-    },[])
+    },[flag])
 
-   
+   const clearNotification=()=>{
+    axios.post('http://localhost:5000/notification/clearnotification',{receiver:localStorage.getItem('username')})
+    .then(()=>{setflag(!flag)})
+    .catch((err)=>{console.log(err)})
+   }
     
   return (
-    <div >Notification
+    <div >
+        <div style={{display:'flex',justifyContent:'space-between'}}>
+            
+        <h3>Notification</h3>
+        {notification.length>0 && (<h6 onClick={clearNotification} style={{color:'#2e7d32'}}>Clear Notification</h6>)}
+        
+        </div>
         {
          notification.map((i,index)=>{
             return(

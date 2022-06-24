@@ -27,9 +27,9 @@ export default function Newest() {
     const [userdata, setuserdata] = useState([])
     const [commentflafID, setcommentflafID] = useState('')
 
-    useEffect(()=>{
-        socket = io(ENDPOINT)
-    },[])
+    // useEffect(()=>{
+    //     socket = io(ENDPOINT)
+    // },[])
 
     useEffect(()=>{
         axios.post('http://localhost:5000/getalluser/userprofile',{username:localStorage.getItem('username')},{headers:{
@@ -56,22 +56,7 @@ export default function Newest() {
         {headers:{
             "Authorization":  localStorage.getItem('token')
         }})
-        axios.post('http://localhost:5000/notification/addtonotification',{
-            sender:localStorage.getItem('id'),
-            receiver:receiver,
-            postid:postid,
-            like:true,
-            Comment:false,
-            commentText:'',
-        },
-        {headers:{
-            "Authorization":  localStorage.getItem('token')
-        }})
-        .then((response)=>{
-            console.log('notification send',response)
-            socket.emit("new notification",response.data)
-        })
-        .catch((err)=>{console.log(err)})
+        
     }
     //---------------FOLLOW USER--------------
     const followUser =(followuser)=>{
@@ -86,6 +71,25 @@ export default function Newest() {
     //------------HANDLE COMMENT---------------
     const CommentonPost =(id)=>{
         setcommentflafID(id)
+    }
+    //-------------SEND NOTIFICATION---------------
+    const onSendNotification=(postid,receiver)=>{
+        axios.post('http://localhost:5000/notification/addtonotification',{
+            sender:localStorage.getItem('id'),
+            receiver:receiver,
+            postid:postid,
+            like:true,
+            Comment:false,
+            commentText:'',
+        },
+        {headers:{
+            "Authorization":  localStorage.getItem('token')
+        }})
+        .then((response)=>{
+            console.log('notification send',response)
+            // socket.emit("new notification",response.data)
+        })
+        .catch((err)=>{console.log(err)})
     }
 
   return (
@@ -132,11 +136,19 @@ export default function Newest() {
                                         }
                                     </div>
                                     <div className='like-comment-btn'>
-                                        <IconButton onClick={()=>likepost(i._id,i.username)}>
+                                        
                                             {!i.postLike?.includes(localStorage.getItem('username')) 
-                                            ? (<FavoriteIcon  sx={{fontSize:'30px'}}/>)
-                                            :(<FavoriteIcon  sx={{fontSize:'30px',color:'red'}}/>)} 
-                                        </IconButton><br/>
+                                            ? (<><IconButton onClick={()=>{
+                                                onSendNotification(i._id,i.username)
+                                                likepost(i._id,i.username)}}>
+                                                    <FavoriteIcon  sx={{fontSize:'30px'}}/>
+                                                </IconButton><br/>
+                                                </>)
+                                            :(<><IconButton onClick={()=>likepost(i._id,i.username)}>
+                                                    <FavoriteIcon  sx={{fontSize:'30px',color:'red'}}/>
+                                                </IconButton><br/>
+                                                </>)} 
+                                        
                                         <p>{i.postLike.length}</p>
                                         <IconButton onClick={()=>CommentonPost(i._id)}>
                                             <CommentRoundedIcon/>

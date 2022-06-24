@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogContent } from '@mui/material'
+import { Badge, Button, Dialog, DialogContent } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import './home.css'
 import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
@@ -16,10 +16,12 @@ import Newpost from './component/newPost/Newpost';
 import axios from 'axios'
 import ChatApp from '../chat/ChatApp';
 import Notification from '../notification/Notification';
+import { useSelector } from 'react-redux';
 
 
 export default function Home() {
  
+    const numberofnotification= useSelector((state)=>state.user.notification)
     const [open, setOpen] = React.useState(false);
     const [post, setpost] = useState([])
     const [loading, setloading] = useState(true)
@@ -72,7 +74,7 @@ export default function Home() {
                         <Nav.Link eventKey={"chat"} style={{color:'#464242'}}><ChatIcon/> Chat</Nav.Link>
                     </Nav.Item>
                     <Nav.Item >
-                        <Nav.Link eventKey={"notification"} style={{color:'#464242'}}><NotificationsIcon/> notification</Nav.Link>
+                        <Nav.Link eventKey={"notification"} style={{color:'#464242'}}><NotificationsIcon/> notification <span style={{color:'#2e7d32',fontWeight:700,marginLeft:'30px'}}> {numberofnotification}</span></Nav.Link>
                     </Nav.Item>
                     <Nav.Item >
                         <Nav.Link eventKey={"tranding"} style={{color:'#464242'}}><TagIcon/> tranding</Nav.Link>

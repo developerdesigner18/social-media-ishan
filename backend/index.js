@@ -45,10 +45,10 @@ const io = require('socket.io')(server,{
 io.on('connection',(socket)=>{
     
     // console.log('connected to soket.io');
-    
+    // console.log(socket.id,"hello");
     socket.on("setup",(userdata)=>{
         socket.join(userdata._id)
-        // console.log(userdata._id);
+        
         socket.emit("connected")
     })
 
@@ -71,8 +71,9 @@ io.on('connection',(socket)=>{
 
     
     socket.on('new notification',(data)=>{
+        console.log(data.sender,'data');
         console.log('socket call');
-        socket.emit("send notification",data)
+        socket.in(data.sender).emit("send notification",data)
     })
 
     // socket.emit("me", socket.id)

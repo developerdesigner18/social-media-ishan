@@ -41,7 +41,7 @@ export default function UserStory({selectedUser,selectedUsername,selectedUserIma
                     
                   </div>
                   {item.storylist.includes('.mp4')
-                    ?(<video height='500px' width='400px' controls loop autoPlay>
+                    ?(<video height='500px' width='400px' controls autoPlay>
                           <source src={`http://localhost:5000/static/${item.storylist}`} type="video/mp4" height='500px' width='400px'/>
                       </video>)
                     :(<img src={`http://localhost:5000/static/${item.storylist}`} height='540px' width='400px' style={{marginTop:'-50px'}}/>)

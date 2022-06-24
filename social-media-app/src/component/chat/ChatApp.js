@@ -140,7 +140,7 @@ export default function ChatApp() {
     },[chatId,allmsgFlag])
 
     useEffect(()=>{
-        console.log("chat");
+        // console.log("chat");
         socket.on("message recieved",(newMeesageRecieved)=>{
             // console.log("1",selectedChatCompare._id);
             // console.log('2',newMeesageRecieved.chat._id);

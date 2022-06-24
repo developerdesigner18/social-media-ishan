@@ -49,5 +49,13 @@ route.post('/fatchnotification',verify,(req,res)=>{
     })
 })
 
+route.post('/clearnotification',(req,res)=>{
+    Notification.deleteMany({receiver:req.body.receiver})
+    .then((response)=>{
+        console.log('clear notification')
+        res.send(response)
+})
+})
+
 
 module.exports= route
